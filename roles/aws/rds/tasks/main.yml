@@ -1,0 +1,17 @@
+---
+# file: roles/aws/rds/tasks/main.yml
+
+- name: Manage application Grants
+  mysql_user:
+    user: "{{ item.user }}"
+    password: "{{ item.password }}"
+    host: "{{ item.host }}"
+    priv: "{{ item.privileges | join('/') }}"
+    append_privs: true
+    encrypted: yes
+    login_host: "{{ database_aws_secret.host }}"
+    login_user: "{{ database_aws_secret.username }}"
+    login_password: "{{ database_aws_secret.password }}"
+  with_items: "{{ required_application_grants }}"
+  vars:
+      database_aws_secret: "{{ lookup('aws_secret',aws_rds_identifier+'-admin-password', region='eu-west-1') }}"

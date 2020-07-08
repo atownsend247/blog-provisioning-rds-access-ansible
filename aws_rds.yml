@@ -1,0 +1,8 @@
+---
+# file: aws_rds.yml
+
+- hosts: aws-rds
+  become: false
+  gather_facts: no
+  roles:
+    - aws/rds

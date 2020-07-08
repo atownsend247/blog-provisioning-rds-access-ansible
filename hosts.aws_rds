@@ -1,0 +1,5 @@
+[aws_rds:children]
+myapplication
+
+[myapplication]
+myapplication-db-master ansible_connection=local

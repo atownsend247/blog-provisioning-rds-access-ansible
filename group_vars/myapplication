@@ -1,0 +1,7 @@
+aws_rds_application_subnetmask: 10.71.0.0/255.255.255.0
+
+aws_rds_user_hash_appuser: '*90BA3AC0BFDE07AE334CA523CB27167AE33825B9'
+aws_rds_user_mailuser: '*B094120DF11C8B375C273D283E1467FAB97E32EC'
+aws_rds_user_debuggeruser: '*A826E9B5669AA7C72E914F1C2A771DA015216435'
+
+aws_rds_identifier: 'app-db-identity'

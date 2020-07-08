@@ -1,0 +1,25 @@
+---
+# file: roles/aws/rds/vars/main.yml
+
+# These are for the application on the web servers
+required_application_grants:
+  - user: appuser
+    password: "{{ aws_rds_user_hash_app }}"
+    privileges:
+    - 'db1.*:SELECT,INSERT,UPDATE,DELETE,CREATE TEMPORARY TABLES,SHOW VIEW,EXECUTE,EVENT,TRIGGER,LOCK TABLES,REFERENCES'
+    - 'db2.*:SELECT,INSERT,UPDATE,DELETE,CREATE TEMPORARY TABLES,SHOW VIEW,EXECUTE,EVENT,TRIGGER,LOCK TABLES,REFERENCES'
+    - 'db3.*:SELECT,INSERT,UPDATE,DELETE,CREATE TEMPORARY TABLES,SHOW VIEW,EXECUTE,EVENT,TRIGGER,LOCK TABLES,REFERENCES'
+    host: "{{ aws_rds_application_subnetmask }}"
+    state: 'present'
+  - user: mailuser
+    password: "{{ aws_rds_user_mailuser }}"
+    privileges:
+    - 'maildb.*:SELECT,INSERT'
+    host: "{{ aws_rds_application_subnetmask }}"
+    state: 'present'
+  - user: debugger
+    password: "{{ aws_rds_user_debuggeruser }}"
+    privileges:
+    - '*.*:SELECT,INSERT,UPDATE,DELETE'
+    host: "{{ aws_rds_application_subnetmask }}"
+    state: 'absent'
